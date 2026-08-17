@@ -1,0 +1,367 @@
+/* ⚠️ Tailwind v4 では `@tailwind base/components/utilities`（v3の書き方）は無効。
+   これを置いたままだとユーティリティが1つも生成されず、px-6 や lg:grid-cols-4 が
+   全て効かないままレイアウトが崩れる（実測: 出力CSSにTailwindのクラスが皆無だった）。 */
+@import "tailwindcss";
+
+:root {
+  /* 色味の参照（okina指定）: keta-travel.com の実CSSから
+       CTAの赤 #DC003B ／ 太極旗の青 #0047A0・#134AA9 ／ クリーム #FCF9EA・#FFF7EC ／ 金 #C9AD00
+     ⚠️「韓国は白多めに」という指示のため、地色は白を基本にし、
+        濃色は見出し・表ヘッダー・フッターなど面積の小さいところだけに使う。
+     ⚠️ 変数名はNZ/AUと同じ（CSSをそのまま流用するため）。 */
+  --color-navy: #0047A0;
+  --color-navy-light: #134AA9;
+  --color-navy-dark: #003377;
+  --color-red: #DC003B;
+  --color-red-dark: #B80031;
+  --color-red-light: #FF8AA6;
+  --color-teal: #1F8A8A;
+  --color-gray-bg: #FFFBF3;
+  --color-gray-light: #F7F7F7;
+  --color-gray-border: #E6E8EF;
+  --color-text: #262B36;
+  --color-text-light: #5F6674;
+  --color-red-vivid: #DC003B;   /* keta-travel.com と同じCTA赤 */
+  --color-gold: #C9AD00;        /* カードの「」角飾り・見出し罫 */
+  --color-gold-dark: #A08A00;
+  --color-border: #E6E8EF;
+  --color-bg-soft: #FFFBF3;     /* ごく薄いクリーム。白基調を崩さない範囲で節を分ける */
+  --color-blue-light: #DCE6F7;
+}
+
+body {
+  font-family: var(--font-noto-sans), 'Noto Sans', sans-serif;
+  color: var(--color-text);
+  background: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-noto-serif), 'Noto Serif', serif;
+  color: var(--color-navy);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--color-navy);
+  color: white;
+}
+
+.content-link {
+  color: var(--color-navy);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.content-link:hover {
+  color: var(--color-navy-light);
+}
+
+
+/* Alternating section wrapper for subpages */
+.alt-section-white {
+  background-color: #ffffff;
+}
+.alt-section-gray {
+  background-color: #F9FAFB;
+}
+
+/* CTA button styling - rounded with white border */
+.cta-button-red {
+  display: block;
+  width: 100%;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #8d1812;
+  border: 2px solid white;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  color: white !important;
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.cta-button-red:hover {
+  background-color: #6d120e;
+}
+
+/* ── ヒーロー ───────────────────────────────
+   キービジュアルは Nano Banana Pro で生成（ニュージーランドの氷河湖と南アルプス）。
+   左側にテキストを置くため、左からの暗いグラデーションを重ねて可読性を確保する。 */
+.hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-navy);
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;   /* hero-zoom のスケールがはみ出さないように */
+}
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 60%;
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,42,96,.88) 0%, rgba(0,42,96,.68) 46%, rgba(0,42,96,.18) 100%);
+}
+.hero-inner { position: relative; }
+.eyebrow {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  padding: .35rem 1rem;
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.btn-primary {
+  background: var(--color-red);
+  color: #fff;
+  padding: .95rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn-primary:hover { background: var(--color-red-dark); }
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,.6);
+  color: #fff;
+  padding: .95rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+}
+.btn-ghost:hover { background: rgba(255,255,255,.12); }
+/* 統計カード（参照サイトと同じく、ヒーロー下にせり出す形） */
+.stat-card {
+  background: #fff;
+  border-top: 3px solid var(--color-red);
+  border-radius: 8px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 8px 28px rgba(0,71,160,.10);
+}
+
+/* ── ここから eta-se.com の設計を移植（okina指摘の差分）────────────────
+   参照元の実装値をそのまま合わせている:
+     ボタン  .btn-red   / .btn-outline  … radius .625rem・押すと1px浮く
+     カード  .card .feature-card        … 金の「」角飾り＋hoverで持ち上がる
+     見出し  .heading-band              … 見出しの上に金→紺のグラデ罫
+     数値    .stat-num                  … 表示用セリフ体＋金の下線
+     出現    .reveal                    … スクロールで下から24pxフェードイン
+     追従    .cta-sticky-bar            … 下から出る固定CTA
+   ⚠️ prefers-reduced-motion では動きを止める（参照サイトも同じ扱い）。 */
+
+/* ボタン ------------------------------------------------------------- */
+.btn-red {
+  display: inline-block;
+  background: var(--color-red-vivid);
+  color: #fff !important;
+  border-radius: .625rem;
+  padding: .85rem 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 8px 18px -6px rgba(220,0,59,.45);
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.btn-red:hover { background: var(--color-red-dark); transform: translateY(-1px); }
+.btn-outline {
+  display: inline-block;
+  background: #fff;
+  color: var(--color-navy) !important;
+  border: 2px solid var(--color-navy);
+  border-radius: .625rem;
+  padding: .8rem 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.btn-outline:hover { background: var(--color-navy); color: #fff !important; }
+/* ヒーロー内（濃紺の上）に置く白抜きの副ボタン */
+.btn-outline-light {
+  display: inline-block;
+  background: rgba(255,255,255,.08);
+  color: #fff !important;
+  border: 2px solid rgba(255,255,255,.65);
+  border-radius: .625rem;
+  padding: .8rem 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.btn-outline-light:hover { background: rgba(255,255,255,.18); transform: translateY(-1px); }
+/* 節の締めに置く横長CTA（参照サイトの .cta-button-red と同じ寸法） */
+.cta-button-red {
+  display: block;
+  width: 100%;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--color-red-vivid);
+  color: #fff !important;
+  border: 2px solid #fff;
+  border-radius: .75rem;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1);
+  transition: background-color .2s;
+}
+.cta-button-red:hover { background: var(--color-red-dark); }
+
+/* カード（「」の角飾り付き）--------------------------------------------- */
+.card, .feature-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+}
+.card { border-radius: .5rem; }
+/* 角飾りを付ける .feature-card だけ、参照サイトと同じく角丸なし・上辺なし */
+.feature-card { border-radius: 0; border-top: 0; }
+.card { padding: 1.25rem 1.4rem; box-shadow: 0 4px 14px -8px rgba(0,71,160,.14); }
+.feature-card { padding: 1.75rem 1.5rem; height: 100%; box-shadow: 0 4px 16px -10px rgba(0,71,160,.16); }
+.card:hover { border-color: var(--color-blue-light); transform: translateY(-2px); box-shadow: 0 12px 26px -10px rgba(0,71,160,.22); }
+.feature-card:hover { border-color: var(--color-blue-light); transform: translateY(-4px); box-shadow: 0 18px 34px -14px rgba(0,71,160,.24); }
+/* ⚠️ 角飾り（「」）は .feature-card だけに限定する。
+   全カードに付けると画面に十数個並んで過剰になる（okina指摘・2026-08-17）。 */
+.feature-card::before, .feature-card::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-gold);
+  pointer-events: none;
+}
+.feature-card::before { top: 7px; left: 7px; border-bottom: 0; border-right: 0; }
+.feature-card::after { bottom: 7px; right: 7px; border-top: 0; border-left: 0; }
+
+/* 見出し ------------------------------------------------------------- */
+.heading-band {
+  position: relative;
+  padding-bottom: .75rem;
+  font-family: var(--font-noto-serif), serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-navy) !important;
+  word-break: break-word;
+}
+.heading-band::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-navy) 75%);
+}
+.heading-rule { position: relative; padding-bottom: .8rem; }
+.heading-rule::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 64px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-navy));
+}
+
+/* 数値 --------------------------------------------------------------- */
+.stat-num {
+  display: inline-block;
+  font-family: var(--font-noto-serif), serif;
+  color: var(--color-navy);
+  font-size: clamp(1.7rem, 4.4vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.04;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-gold);
+}
+.stat-label { margin-top: .55rem; font-size: .82rem; letter-spacing: .02em; color: var(--color-text-light); }
+
+/* スクロールで出てくる ------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s, transform .7s;
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+/* 下から出る追従CTA --------------------------------------------------- */
+.cta-sticky-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  padding: .7rem 1.1rem;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-top: 2px solid var(--color-red-vivid);
+  box-shadow: 0 -8px 28px -14px rgba(0,0,0,.28);
+  transform: translateY(115%);
+  transition: transform .35s;
+  will-change: transform;
+}
+.cta-sticky-bar.is-shown { transform: translateY(0); }
+.cta-sticky-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.cta-sticky-title { font-size: .92rem; font-weight: 700; letter-spacing: .01em; color: var(--color-navy); }
+.cta-sticky-sub { font-size: .66rem; color: var(--color-text-light); }
+.cta-sticky-btn {
+  flex-shrink: 0;
+  background: var(--color-red-vivid);
+  color: #fff !important;
+  border-radius: .6rem;
+  padding: .7rem 1.4rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 8px 18px -6px rgba(220,0,59,.5);
+  transition: background .2s, transform .2s;
+}
+.cta-sticky-btn:hover { background: var(--color-red-dark); transform: translateY(-1px); }
+
+/* ヒーロー画像のゆっくりズーム（参照サイト: 22秒で scale 1.1 → 1）------- */
+@keyframes heroZoom { 0% { transform: scale(1.1); } 100% { transform: scale(1); } }
+.hero-zoom { animation: heroZoom 22s ease-out forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cta-sticky-bar { transition: none; }
+  .hero-zoom { animation: none; }
+  .card:hover, .feature-card:hover, .btn-red:hover, .cta-sticky-btn:hover { transform: none; }
+}
