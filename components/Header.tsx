@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FACTS as F } from "@/data/facts";
+import { LANGS, LANG_CODES } from "@/data/langs";
 
 /**
  * ヘッダー。⚠️ 韓国サイトは「白多め・最上部も白系」の指示（okina 2026-08-17）なので、
@@ -29,6 +30,15 @@ export default function Header() {
             Korea Electronic Travel Authorization
           </span>
         </Link>
+        <div className="flex items-center gap-4">
+          <nav className="hidden sm:flex items-center gap-2 text-xs" aria-label="Language">
+            <Link href="/" style={{ color: "var(--color-text-light)" }}>EN</Link>
+            {LANG_CODES.map((c) => (
+              <Link key={c} href={`/${c}/`} style={{ color: "var(--color-text-light)" }}>
+                {LANGS[c].label}
+              </Link>
+            ))}
+          </nav>
         <a
           href={F.officialUrl}
           target="_blank"
@@ -38,6 +48,7 @@ export default function Header() {
         >
           Official site
         </a>
+        </div>
       </div>
     </header>
   );

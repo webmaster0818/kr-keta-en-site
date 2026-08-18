@@ -3,6 +3,7 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import StickyCta from "@/components/StickyCta";
 import { FACTS as F, SITE } from "@/data/facts";
+import { LANG_CODES } from "@/data/langs";
 
 /*
   構成・UIは nz-eta-site / au-evisitor-en-site と揃えている（okina指摘済みの事項は最初から反映）:
@@ -22,7 +23,11 @@ export const metadata: Metadata = {
   },
   description:
     `A plain-English guide to Korea's K-ETA: many nationalities — including the US, UK, Germany, Australia and Canada — are temporarily exempt until ${F.exemptionUntil}. If you do need one it costs ${F.fee} (${F.feeUsdApprox}), lasts ${F.validYears} years and is reviewed within about ${F.decisionTypical}.`,
-  alternates: { canonical: `${SITE}/` },
+  alternates: {
+    canonical: `${SITE}/`,
+    // ⚠️ 言語版を足したら自動で増える（手書きしない）
+    languages: { en: `${SITE}/`, ...Object.fromEntries(LANG_CODES.map((c) => [c, `${SITE}/${c}/`])) },
+  },
   openGraph: {
     title: `K-ETA: who still needs it, and who is exempt until ${F.exemptionUntil}`,
     description: `The exemption ends ${F.exemptionUntil}. What K-ETA costs, how long it lasts, and how the permitted stay is decided.`,
