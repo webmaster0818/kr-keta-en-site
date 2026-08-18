@@ -1,5 +1,12 @@
 import { FACTS as F, type LangContent } from "./_schema";
 
+/** 表記のローカライズ。⚠️ 値は FACTS と同じものを指す（別の数字を書かない）。
+ *  F.exemptionUntil = "31 December 2026" / F.decisionTypical = "72 hours"
+ *  / F.feeUsdApprox = "about US$7–8" */
+const EXEMPT_UNTIL = "2026年12月31日";
+const DECISION = "72 小時";
+const USD_APPROX = "約 7〜8 美元";
+
 /**
  * 繁体字（/zh-tw/）。読者＝台湾のパスポート保持者。
  *
@@ -17,8 +24,8 @@ export const zhTw: LangContent = {
   label: "繁體中文",
   audience: "台灣",
   meta: {
-    title: `台灣護照到 ${F.exemptionUntil} 前免辦 K-ETA — 之後怎麼辦？`,
-    description: `韓國對台灣等地暫時免除 K-ETA，期限到 ${F.exemptionUntil}。這段期間可以直接登機；期限過後則需申請（${F.fee}、效期 ${F.validYears} 年）。本頁說明現在該做什麼、之後該做什麼。`,
+    title: `台灣護照到 ${EXEMPT_UNTIL} 前免辦 K-ETA — 之後怎麼辦？`,
+    description: `韓國對台灣等地暫時免除 K-ETA，期限到 ${EXEMPT_UNTIL}。這段期間可以直接登機；期限過後則需申請（${F.fee}、效期 ${F.validYears} 年）。本頁說明現在該做什麼、之後該做什麼。`,
   },
   header: {
     site: "K-ETA 指南",
@@ -30,21 +37,21 @@ export const zhTw: LangContent = {
     h1Before: "台灣護照到 2026 年底前 ",
     h1Highlight: "不需要",
     h1After: " K-ETA",
-    lead: `韓國目前對台灣等國家與地區暫停適用 K-ETA，期限至 ${F.exemptionUntil}。在此之前可以不申請直接搭機；期限之後預計恢復，屆時費用為 ${F.fee}、效期 ${F.validYears} 年。`,
+    lead: `韓國目前對台灣等國家與地區暫停適用 K-ETA，期限至 ${EXEMPT_UNTIL}。在此之前可以不申請直接搭機；期限之後預計恢復，屆時費用為 ${F.fee}、效期 ${F.validYears} 年。`,
     ctaPrimary: "到官方網站確認名單",
     ctaSecondary: "我現在需要嗎？",
     disclaimer: "獨立資訊網站 · 與韓國政府無關 · 資料核對日",
     imageAlt: "陽光下的韓國宮殿屋簷與遠方首爾市區",
   },
   stats: [
-    { v: "免申請", l: `到 ${F.exemptionUntil} 為止`, s: "台灣護照適用" },
-    { v: F.fee, l: "恢復後的費用", s: F.feeUsdApprox },
+    { v: "免申請", l: `到 ${EXEMPT_UNTIL} 為止`, s: "台灣護照適用" },
+    { v: F.fee, l: "恢復後的費用", s: USD_APPROX },
     { v: `${F.validYears} 年`, l: "效期", s: "可多次入境" },
-    { v: F.decisionTypical, l: "審核時間", s: "建議提早申請" },
+    { v: DECISION, l: "審核時間", s: "建議提早申請" },
   ],
   whatIs: {
     h2: "現在到底需不需要申請？",
-    p1: `不需要。韓國自「訪韓年」政策起暫停對部分國家與地區適用 K-ETA，並已多次延長，目前的期限是 ${F.exemptionUntil}。台灣護照持有人在這段期間可以不申請 K-ETA 直接登機。`,
+    p1: `不需要。韓國自「訪韓年」政策起暫停對部分國家與地區適用 K-ETA，並已多次延長，目前的期限是 ${EXEMPT_UNTIL}。台灣護照持有人在這段期間可以不申請 K-ETA 直接登機。`,
     p2: `不過免除是「暫時」的。若未再延長，2027 年 1 月 1 日起就需要重新申請。若行程落在年底跨年前後，建議在出發前重新確認官方名單，因為適用範圍曾經變動過。`,
   },
   features: [
@@ -67,7 +74,7 @@ export const zhTw: LangContent = {
     th: ["你的情況", "需要 K-ETA 嗎", "該做的事", "費用"],
     rows: [
       [
-        `台灣護照，且在 ${F.exemptionUntil} 前入境`,
+        `台灣護照，且在 ${EXEMPT_UNTIL} 前入境`,
         "不需要",
         "直接搭機。若想省下入境卡，可自願申請",
         "免申請時為 0",
@@ -86,14 +93,14 @@ export const zhTw: LangContent = {
       ],
       ["非免簽國家的護照", "不適用", "需要申請簽證，而非 K-ETA", "依簽證種類"],
     ],
-    note: `各家報導對免除國家的數量說法不一（有 22 國與 67 國等不同說法），因此本頁不列出數字，請以 ${F.officialHost} 的官方名單為準。核對日：${F.updatedLabel}。`,
+    note: `各家報導對免除國家的數量說法不一（有 22 國與 67 國等不同說法），因此本頁不列出數字，請以 ${F.officialHost} 的官方名單為準。核對日：2026年8月17日。`,
   },
   steps: {
     h2: "需要申請時的流程",
     items: [
       {
         h: "先確認自己是否在免除名單內",
-        p: `免除期限為 ${F.exemptionUntil}。名單曾經變更，出發前請在 ${F.officialHost} 再確認一次。`,
+        p: `免除期限為 ${EXEMPT_UNTIL}。名單曾經變更，出發前請在 ${F.officialHost} 再確認一次。`,
       },
       {
         h: "使用官方網站或官方應用程式",
@@ -105,7 +112,7 @@ export const zhTw: LangContent = {
       },
       {
         h: "取得結果後再出發",
-        p: `審核通常在 ${F.decisionTypical} 內完成，但沒有保證。請勿等到出發當天，且核准並不代表一定能入境。`,
+        p: `審核通常在 ${DECISION} 內完成，但沒有保證。請勿等到出發當天，且核准並不代表一定能入境。`,
       },
     ],
     cta: `前往 ${F.officialHost}`,
@@ -136,10 +143,10 @@ export const zhTw: LangContent = {
     items: [
       {
         q: "台灣護照現在需要 K-ETA 嗎？",
-        a: `不需要。韓國目前對台灣等國家與地區暫停適用 K-ETA，期限至 ${F.exemptionUntil}。在此之前可直接登機，但請在出發前於 ${F.officialHost} 確認名單是否有變動。`,
+        a: `不需要。韓國目前對台灣等國家與地區暫停適用 K-ETA，期限至 ${EXEMPT_UNTIL}。在此之前可直接登機，但請在出發前於 ${F.officialHost} 確認名單是否有變動。`,
       },
       {
-        q: `${F.exemptionUntil} 之後會怎樣？`,
+        q: `${EXEMPT_UNTIL} 之後會怎樣？`,
         a: "若沒有再次延長，2027 年 1 月 1 日起就會恢復需要 K-ETA。這項免除已延長過不只一次，因此無法斷定，跨年前後出發的人請提早確認。",
       },
       {
@@ -148,7 +155,7 @@ export const zhTw: LangContent = {
       },
       {
         q: "K-ETA 要多少錢？",
-        a: `政府收費為 ${F.fee}（約 ${F.feeUsdApprox}），以信用卡於申請時支付。標價明顯更高的網站是加收了代辦費。`,
+        a: `政府收費為 ${F.fee}（約 ${USD_APPROX}），以信用卡於申請時支付。標價明顯更高的網站是加收了代辦費。`,
       },
       {
         q: "效期多久？",
@@ -178,6 +185,7 @@ export const zhTw: LangContent = {
     languages: "語言",
     articles: "相關內容",
     readMore: "查看詳情",
+    updatedLabel: "2026年8月17日",
   },
   pages: [
     {
@@ -247,12 +255,12 @@ export const zhTw: LangContent = {
   articles: [
     {
       slug: "keta-exemption-2026",
-      title: `K-ETA 免除到 ${F.exemptionUntil} — 台灣旅客現在該注意什麼`,
+      title: `K-ETA 免除到 ${EXEMPT_UNTIL} — 台灣旅客現在該注意什麼`,
       description:
         "免除的來龍去脈、期限、以及行程落在年底前後時的判斷方式。名單曾經變動，出發前的確認方法也一併說明。",
       blocks: [
         {
-          p: `韓國目前對部分國家與地區暫停適用 K-ETA，台灣也在其中，期限是 ${F.exemptionUntil}。這代表在這段期間內，台灣護照持有人可以不申請 K-ETA 直接搭機。`,
+          p: `韓國目前對部分國家與地區暫停適用 K-ETA，台灣也在其中，期限是 ${EXEMPT_UNTIL}。這代表在這段期間內，台灣護照持有人可以不申請 K-ETA 直接搭機。`,
         },
         { h2: "為什麼會有免除" },
         {
@@ -261,7 +269,7 @@ export const zhTw: LangContent = {
         { h2: "跨年前後出發的人要注意" },
         {
           ul: [
-            `${F.exemptionUntil} 以前入境：目前不需要 K-ETA`,
+            `${EXEMPT_UNTIL} 以前入境：目前不需要 K-ETA`,
             "2027 年 1 月 1 日以後入境：若未再延長就需要申請",
             "跨年行程：出發日與回程日分屬不同年度時，請以「入境當下」的規定為準",
           ],
@@ -281,7 +289,7 @@ export const zhTw: LangContent = {
       description: `官方管道、${F.fee} 的費用、審核時間，以及申請時最常出問題的地方。`,
       blocks: [
         {
-          p: `需要申請時，只在 ${F.officialHost} 或官方應用程式辦理。政府收費為 ${F.fee}（約 ${F.feeUsdApprox}），審核通常在 ${F.decisionTypical} 內完成。`,
+          p: `需要申請時，只在 ${F.officialHost} 或官方應用程式辦理。政府收費為 ${F.fee}（約 ${USD_APPROX}），審核通常在 ${DECISION} 內完成。`,
         },
         { h2: "準備的東西" },
         { ul: ["有效護照", "臉部照片（依規格上傳）", "住宿與行程資訊", "可線上付款的信用卡"] },

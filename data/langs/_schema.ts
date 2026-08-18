@@ -62,8 +62,16 @@ export type LangContent = {
   pages: Article[];
   /** 下層記事 */
   articles: Article[];
-  /** UIの共通語 */
-  ui: { updated: string; backToTop: string; languages: string; articles: string; readMore: string };
+  /** UIの共通語。⚠️ updatedLabel は日付の**表記だけ**を現地語にするための任意項目。
+      値そのものは FACTS.updatedLabel と同じ日付を指すこと（別の日付を書かない）。 */
+  ui: {
+    updated: string;
+    backToTop: string;
+    languages: string;
+    articles: string;
+    readMore: string;
+    updatedLabel?: string;
+  };
 };
 
 /** 言語ファイルから数値を参照するための再エクスポート（数字の二重管理を防ぐ） */

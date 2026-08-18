@@ -67,7 +67,7 @@ export default async function LangDoc({ params }: { params: Promise<{ lang: stri
           </nav>
           <h1 className="mt-4 text-2xl md:text-4xl font-bold leading-tight" style={{ color: "#fff" }}>{doc.title}</h1>
           <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,.85)" }}>{doc.description}</p>
-          <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,.7)" }}>{t.ui.updated} {F.updatedLabel}</p>
+          <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,.7)" }}>{t.ui.updated} {t.ui.updatedLabel ?? F.updatedLabel}</p>
         </div>
       </section>
 

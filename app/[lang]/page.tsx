@@ -73,7 +73,7 @@ export default async function LangHome({ params }: { params: Promise<{ lang: str
             </a>
           </div>
           <p className="mt-6 text-xs" style={{ color: "rgba(255,255,255,.78)" }}>
-            {t.hero.disclaimer} {F.updatedLabel}
+            {t.hero.disclaimer} {t.ui.updatedLabel ?? F.updatedLabel}
           </p>
         </div>
       </section>
