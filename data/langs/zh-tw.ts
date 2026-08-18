@@ -5,7 +5,8 @@ import { FACTS as F, type LangContent } from "./_schema";
  *  / F.feeUsdApprox = "about US$7–8" */
 const EXEMPT_UNTIL = "2026年12月31日";
 const DECISION = "72 小時";
-const USD_APPROX = "約 7〜8 美元";
+const USD_APPROX = "7〜8 美元";
+const STAY_RANGE = "30 至 90 天";  // = F.stayRange ("30 to 90 days")
 
 /**
  * 繁体字（/zh-tw/）。読者＝台湾のパスポート保持者。
@@ -61,7 +62,7 @@ export const zhTw: LangContent = {
     },
     {
       h: "K-ETA 不決定你能待多久",
-      p: `K-ETA 只是允許你登機。可停留天數由你的國籍與韓國之間的免簽安排決定（一般在 ${F.stayRange} 之間），最終仍由入境審查官判斷。`,
+      p: `K-ETA 只是允許你登機。可停留天數由你的國籍與韓國之間的免簽安排決定（一般在 ${STAY_RANGE} 之間），最終仍由入境審查官判斷。`,
     },
     {
       h: "只有官方管道是真的",
@@ -163,7 +164,7 @@ export const zhTw: LangContent = {
       },
       {
         q: "可以停留多久？",
-        a: `K-ETA 本身不決定停留天數，而是依你的國籍與韓國之間的免簽安排（一般在 ${F.stayRange} 之間）。實際天數由入境審查官決定。`,
+        a: `K-ETA 本身不決定停留天數，而是依你的國籍與韓國之間的免簽安排（一般在 ${STAY_RANGE} 之間）。實際天數由入境審查官決定。`,
       },
       {
         q: "K-ETA 是簽證嗎？",
@@ -324,7 +325,7 @@ export const zhTw: LangContent = {
         {
           ul: [
             `K-ETA 的效期：${F.validYears} 年（可多次入境）`,
-            `每次可停留的天數：依免簽安排而定，一般在 ${F.stayRange} 之間`,
+            `每次可停留的天數：依免簽安排而定，一般在 ${STAY_RANGE} 之間`,
             "實際獲准的天數：由入境審查官在機場決定",
           ],
         },

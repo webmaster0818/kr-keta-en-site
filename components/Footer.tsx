@@ -1,8 +1,18 @@
+'use client'
+
+import { usePathname } from "next/navigation"
 import { FACTS as F } from "@/data/facts"
+import { LANG_CODES } from "@/data/langs"
 
 /** フッター。⚠️ 韓国サイトは白多めの指示のため、濃色ベタではなく白地＋上辺の赤線にしている。
     ⚠️ 公式ではないことの明示は必須（誤認を避ける）。 */
 export default function Footer() {
+  // ⚠️ 言語ディレクトリ（/de/ /ko/ …）では、そのページ自身が現地語の免責を出している。
+  //    ここで英語のフッターを重ねると、言語ページの末尾だけ英語になる（実際にそうなっていた）。
+  const path = usePathname() || "/"
+  const inLang = LANG_CODES.some((c) => path === `/${c}` || path.startsWith(`/${c}/`))
+  if (inLang) return null
+
   return (
     <footer style={{ background: "#fff", borderTop: "2px solid var(--color-red-vivid)" }} className="py-10">
       <div className="max-w-6xl mx-auto px-6 text-center">
